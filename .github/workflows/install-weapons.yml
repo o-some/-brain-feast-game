@@ -1,0 +1,41 @@
+name: Waffen-System installieren
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - patch_weapons.py
+      - .github/workflows/install-weapons.yml
+
+permissions:
+  contents: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v4
+      - name: Waffen einbauen
+        run: python patch_weapons.py
+      - name: JavaScript prüfen
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          html = Path('index.html').read_text(encoding='utf-8')
+          script = re.search(r'<script>\s*(.*?)\s*</script>', html, re.S).group(1)
+          Path('/tmp/game.js').write_text(script, encoding='utf-8')
+          PY
+          node --check /tmp/game.js
+      - name: Änderung veröffentlichen
+        run: |
+          git config user.name "OpenAI Codex"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Keine Änderung nötig"
+          else
+            git commit -m "Add collectible weapons and destructible obstacles"
+            git push
+          fi
