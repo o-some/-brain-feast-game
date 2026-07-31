@@ -77,3 +77,5 @@ rep(
 
 path.write_text(s, encoding='utf-8')
 print('iOS start v2 repair installed')
+
+# trigger v2 workflow
