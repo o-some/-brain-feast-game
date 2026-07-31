@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - add_landscape_fullscreen.py
+      - .github/workflows/landscape-fullscreen.yml
   workflow_dispatch:
 
 permissions:
