@@ -26,7 +26,7 @@ jobs:
           required = [
             'Blitzschildkröte','Wasserschildkröte','Luftschildkröte','Erdschildkröte',
             'Himmelszorn','Schädelwerfer','Volt-Säge','togglePause','KeyP','pauseBtn','resumeBtn',
-            'lowPower','particles.length>36','shots.length>=3'
+            'lowPower','particles.length>36','shots.length>=limit'
           ]
           missing = [value for value in required if value not in html]
           if missing:
