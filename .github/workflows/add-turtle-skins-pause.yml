@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - add_turtle_skins_pause.py
+      - .github/workflows/add-turtle-skins-pause.yml
   workflow_dispatch:
 
 permissions:
