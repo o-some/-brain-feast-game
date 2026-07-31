@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - add_special_weapons.py
+      - .github/workflows/add-special-weapons.yml
   workflow_dispatch:
 
 permissions:
