@@ -1,0 +1,37 @@
+name: Pikachu Elektro Update
+
+on:
+  push:
+    paths:
+      - apply_simple_pika.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-game:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pikachu-Version einbauen
+        run: python apply_simple_pika.py
+      - name: JavaScript prüfen
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html=Path('index.html').read_text()
+          Path('check.js').write_text(re.search(r'<script>\s*(.*?)\s*</script>',html,re.S).group(1))
+          PY
+          node --check check.js
+      - name: Auf main veröffentlichen
+        run: |
+          rm -f apply_simple_pika.py check.js
+          rm -f .github/workflows/apply-simple-pika.yml .github/workflows/apply-pikachu-v2.yml
+          rm -f apply_pikachu_v2.py pika_patch_*.b64 final_pika_*.b64 goldseg_*.b64
+          git config user.name "Brain Feast Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Add Pikachu electric skin and effects"
+          git push
