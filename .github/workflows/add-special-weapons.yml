@@ -1,0 +1,42 @@
+name: Add collectible special weapons
+
+on:
+  push:
+    paths:
+      - add_special_weapons.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-game:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Spezialwaffen einbauen
+        run: python add_special_weapons.py
+      - name: JavaScript und Waffen prüfen
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path('index.html').read_text()
+          required = ['Himmelszorn','Schädelwerfer','Volt-Säge','p.ammo=50',"type:'storm'","type:'skull'","type:'saw'"]
+          missing = [item for item in required if item not in html]
+          if missing:
+              raise SystemExit('Fehlende Waffenbestandteile: ' + ', '.join(missing))
+          m = re.search(r'<script>\s*(.*?)\s*</script>', html, re.S)
+          if not m:
+              raise SystemExit('JavaScript-Block fehlt')
+          Path('check.js').write_text(m.group(1))
+          PY
+          node --check check.js
+      - name: Änderung veröffentlichen
+        run: |
+          rm -f add_special_weapons.py check.js .github/workflows/add-special-weapons.yml
+          git config user.name "Brain Feast Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Add three collectible 50-shot weapons"
+          git push
