@@ -1,0 +1,56 @@
+name: Add mobile weapon wheel and fullscreen fallback
+
+on:
+  push:
+    paths:
+      - patch_mobile_weapon_wheel.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-game:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch mobile controls
+        run: python patch_mobile_weapon_wheel.py
+      - name: Validate game
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path('index.html').read_text(encoding='utf-8')
+          required = [
+            'Mobile weapon wheel, no text selection',
+            'id="weaponWheel"', 'data-wheel-weapon="storm"',
+            'data-wheel-weapon="skull"', 'data-wheel-weapon="saw"',
+            'wheelWeaponAt', 'stopWheelFire',
+            "'contextmenu','selectstart','dragstart'",
+            'id="fullscreenHelp"', 'function isStandalone()',
+            'manifest.webmanifest', 'Rechts steuern · links Waffenrad & feuern',
+            'weaponInventory', 'Blitzschildkröte'
+          ]
+          missing = [item for item in required if item not in html]
+          if missing:
+              raise SystemExit('Missing features: ' + ', '.join(missing))
+          if 'id="jumpBtn"' in html or "jumpBtn=$('jumpBtn')" in html:
+              raise SystemExit('Old left jump button still present')
+          match = re.search(r'<script>\s*(.*?)\s*</script>', html, re.S)
+          if not match:
+              raise SystemExit('JavaScript block missing')
+          Path('check.js').write_text(match.group(1), encoding='utf-8')
+          manifest = Path('manifest.webmanifest').read_text(encoding='utf-8')
+          if '"display": "fullscreen"' not in manifest or '"orientation": "landscape"' not in manifest:
+              raise SystemExit('Manifest fullscreen settings missing')
+          PY
+          node --check check.js
+      - name: Publish and clean helpers
+        run: |
+          rm -f patch_mobile_weapon_wheel.py check.js .github/workflows/mobile-weapon-wheel.yml
+          git config user.name "Brain Feast Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Add mobile radial weapons and fullscreen app mode"
+          git push
