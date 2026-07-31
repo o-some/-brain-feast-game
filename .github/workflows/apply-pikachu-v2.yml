@@ -3,7 +3,7 @@ name: Pikachu Elektro Version installieren
 on:
   push:
     paths:
-      - apply_pikachu_v2.py
+      - .github/workflows/apply-pikachu-v2.yml
   workflow_dispatch:
 
 permissions:
@@ -15,24 +15,37 @@ jobs:
     steps:
       - name: Repository laden
         uses: actions/checkout@v4
-      - name: Pikachu Elektro Version einbauen
-        run: python apply_pikachu_v2.py
-      - name: JavaScript prüfen
+
+      - name: Elektro-Version zusammensetzen
+        run: |
+          cat pika_patch_1.b64 pika_patch_2.b64 pika_patch_3.b64 pika_patch_4.b64 | tr -d '\n\r ' | base64 -d > apply_pikachu_v2.py
+          python apply_pikachu_v2.py
+
+      - name: JavaScript und Inhalte prüfen
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
           html = Path('index.html').read_text()
-          script = re.search(r'<script>\s*(.*?)\s*</script>', html, re.S).group(1)
-          Path('check.js').write_text(script)
+          required = ['Pikachu', 'Donnerblitz', 'VOLT-TITAN', "function electricSound", "function drawPlayer", "function drawShot"]
+          missing = [item for item in required if item not in html]
+          if missing:
+              raise SystemExit('Fehlende Inhalte: ' + ', '.join(missing))
+          match = re.search(r'<script>\s*(.*?)\s*</script>', html, re.S)
+          if not match:
+              raise SystemExit('Kein JavaScript gefunden')
+          Path('check.js').write_text(match.group(1))
           PY
           node --check check.js
           rm check.js
-      - name: Änderung veröffentlichen
+
+      - name: Auf main veröffentlichen
         run: |
-          rm apply_pikachu_v2.py .github/workflows/apply-pikachu-v2.yml
+          rm -f apply_pikachu_v2.py pika_patch_1.b64 pika_patch_2.b64 pika_patch_3.b64 pika_patch_4.b64
+          rm -f final_pika_1.b64 final_pika_2.b64 final_pika_3a.b64 final_pika_3b.b64 final_pika_4.b64
+          rm -f .github/workflows/apply-pikachu-v2.yml
           git config user.name "Brain Feast Bot"
           git config user.email "actions@users.noreply.github.com"
           git add -A
-          git commit -m "Add Pikachu electric skin and effects"
+          git commit -m "Add Pikachu electric combat update"
           git push
