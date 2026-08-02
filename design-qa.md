@@ -1,4 +1,4 @@
-# Design QA — Chelonaki - TurtleRUN / Gameplay-Art-Pass
+# Design QA — Chelonaki - Elements / Gameplay-Art-Pass
 
 ## Vergleichsziel
 

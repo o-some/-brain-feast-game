@@ -1,6 +1,6 @@
 {
-  "name": "Chelonaki - TurtleRUN",
-  "short_name": "TurtleRUN",
+  "name": "Chelonaki - Elements",
+  "short_name": "Elements",
   "description": "Element-Schildkröten Endless Runner",
   "start_url": "./?mode=standalone",
   "scope": "./",
