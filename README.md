@@ -15,7 +15,16 @@ Ein mobiles 16:9-Endless-Runner- und Bosskampf-Spiel mit vier Element-Schildkrö
 - Schutzschilde blocken jeweils einen Treffer; maximal zwei Schilde können gleichzeitig getragen werden.
 - Der Pickup-Magnet zieht neun Sekunden lang sammelbare Gegenstände an.
 - Der Turbo-Modus erhöht neun Sekunden lang Laufgeschwindigkeit und Feuerrate.
+- Alle Pickups tragen eine kurze Funktionsbeschriftung, beispielsweise `+1 LEBEN`, `SAMMELT` oder `SCHADEN ×2`.
+- Fünf Kampf-Buffs bleiben jeweils 30 Sekunden aktiv:
+  - `3× FEUER`: drei Feuerkugeln kreisen um die Schildkröte.
+  - `ZIELSCHUSS`: zusätzliche automatische Präzisionsschüsse.
+  - `HIMMELSLASER`: automatische Blitzschläge von oben.
+  - `SCHADEN ×2`: verdoppelt den Schaden aller Angriffe.
+  - `KETTENBLITZ`: trifft regelmäßig das nächste Ziel.
 - Kleine Bodenjäger verfolgen die Schildkröte, drehen sich zu ihr und springen. Sie verursachen bei Berührung Schaden und können abgeschossen werden.
+
+Die Reichweite der fliegenden Waffen beträgt 195 % der ursprünglichen Reichweite.
 
 ## Volt-Titan-Bosse
 
