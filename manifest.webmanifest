@@ -1,6 +1,6 @@
 {
-  "name": "Brain Feast",
-  "short_name": "Brain Feast",
+  "name": "Chelonaki - TurtleRUN",
+  "short_name": "TurtleRUN",
   "description": "Element-Schildkröten Endless Runner",
   "start_url": "./?mode=standalone",
   "scope": "./",
