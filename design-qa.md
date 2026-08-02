@@ -1,4 +1,4 @@
-# Design QA — Graphic Voltage
+# Design QA — Chelonaki - TurtleRUN / Graphic Voltage
 
 ## Vergleichsziel
 
@@ -53,6 +53,13 @@ Keine verbleibenden P0-, P1- oder P2-Abweichungen.
 ## Restliche P3-Politur
 
 - Die exakte handgezeichnete Wortmarke und die angeschnittenen Button-Ecken der Konzeptgrafik sind leicht stilisiert statt pixelidentisch. Die aktuelle Umsetzung bleibt bewusst bei lokal lizenzierten Fonts, echten Icons und stabilen rechteckigen Touch-Flächen.
+
+## Nachträgliche Funktionskorrektur
+
+- Der Spielname wurde auf `Chelonaki - TurtleRUN` aktualisiert.
+- Automatische Vollbildaufrufe wurden aus Start-, Orientierungs- und Wiederholungsabläufen entfernt. Vollbild bleibt eine ausdrücklich gewählte Aktion.
+- Die spezifischere Regel `#start.hidden` stellt sicher, dass der Startscreen beim Spielbeginn tatsächlich ausgeblendet wird.
+- Browserprüfung bei 1280 × 720: Klick auf `JETZT SPIELEN`, Startscreen `display: none`, Punktestand läuft, Vollbildstatus `false`, keine Konsolenfehler.
 
 ## Implementierungscheckliste
 
