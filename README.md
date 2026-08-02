@@ -10,6 +10,13 @@ Ein mobiles 16:9-Endless-Runner- und Bosskampf-Spiel mit vier Element-Schildkrö
 - Die Schildkröte dreht sich mit der Laufrichtung und feuert auch nach links.
 - 1–4 wechseln die Waffen, P pausiert.
 
+## Power-ups und kleine Gegner
+
+- Schutzschilde blocken jeweils einen Treffer; maximal zwei Schilde können gleichzeitig getragen werden.
+- Der Pickup-Magnet zieht neun Sekunden lang sammelbare Gegenstände an.
+- Der Turbo-Modus erhöht neun Sekunden lang Laufgeschwindigkeit und Feuerrate.
+- Kleine Bodenjäger verfolgen die Schildkröte, drehen sich zu ihr und springen. Sie verursachen bei Berührung Schaden und können abgeschossen werden.
+
 ## Volt-Titan-Bosse
 
 - Die Arena bleibt während des Bosskampfs stehen, der Volt-Titan bewegt sich darin aber frei.
