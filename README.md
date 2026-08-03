@@ -5,14 +5,16 @@ Ein mobiles 16:9-Endless-Runner- und Bosskampf-Spiel mit vier Element-Schildkrö
 ## Steuerung
 
 - Pfeiltasten beziehungsweise der rechte Joystick bewegen die Schildkröte.
-- Leertaste oder Pfeil hoch springt.
+- Pfeil hoch springt; die Leertaste hält den Energieschild aktiv.
 - F/X beziehungsweise das linke Waffenrad feuert.
+- Auf dem Handy aktiviert Ziehen vom linken Waffenrad nach links unten den Energieschild.
 - Die Schildkröte dreht sich mit der Laufrichtung und feuert auch nach links.
 - 1–4 wechseln die Waffen, P pausiert.
 
 ## Power-ups und kleine Gegner
 
 - Schutzschilde blocken jeweils einen Treffer; maximal zwei Schilde können gleichzeitig getragen werden.
+- Der zusätzliche Energieschild macht beim Halten unverwundbar, verbraucht bis zu 30 Sekunden Energie und erhält nach jedem vierten besiegten Boss bis zu 5 Sekunden zurück.
 - Der Pickup-Magnet zieht neun Sekunden lang sammelbare Gegenstände an.
 - Der Turbo-Modus erhöht neun Sekunden lang Laufgeschwindigkeit und Feuerrate.
 - Alle Pickups tragen eine kurze Funktionsbeschriftung, beispielsweise `+1 LEBEN`, `SAMMELT` oder `SCHADEN ×2`.
